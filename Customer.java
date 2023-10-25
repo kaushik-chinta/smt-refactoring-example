@@ -21,7 +21,7 @@ public class Customer {
         String result = "\nRental Record for " + getName() + "\n";
 
         for (Rental rental : rentals) {
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.getCharge()) + "\n";
+            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.getMovie().getCharge(rental.getDaysRented())) + "\n";
         }
 
         // Add footer line
@@ -36,10 +36,10 @@ public class Customer {
 
 		for (Rental rental : rentals) {
 			result += "\t<tr><td>" + rental.getMovie().getTitle() + "</td><td>" +
-			String.valueOf(rental.getCharge()) + "</td></tr>\n";
+			String.valueOf(rental.getMovie().getCharge(rental.getDaysRented())) + "</td></tr>\n";
 		}
         result += "</table>\n";
-        
+
         // Add footer line
         result += "<p>Amount owed is <b>" + String.valueOf(getTotalCharge()) + "</b></p>\n";
         result += "<p>You earned <b>" + String.valueOf(getTotalFrequentRenterPoints()) +
@@ -50,7 +50,7 @@ public class Customer {
     private double getTotalCharge() {
         double result = 0;
         for (Rental rental : rentals) {
-            result += rental.getCharge();
+            result += rental.getMovie().getCharge(rental.getDaysRented());
         }
         return result;
     }
@@ -58,7 +58,7 @@ public class Customer {
     private int getTotalFrequentRenterPoints() {
         int result = 0;
         for (Rental rental : rentals) {
-            result += rental.getFrequentRenterPoints();
+            result += rental.getMovie().getFrequentRenterPoints(rental.getDaysRented());
         }
         return result;
     }
