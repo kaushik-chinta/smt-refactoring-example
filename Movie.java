@@ -4,7 +4,7 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
+    private PriceCalculator calculator;
 
     public Movie(String title, int priceCode) {
         this.title = title;
@@ -12,11 +12,21 @@ public class Movie {
     }
 
     public int getPriceCode() {
-        return priceCode;
+        return calculator.getPriceCode();
     }
 
-    public void setPriceCode(int newPriceCode) {
-        priceCode = newPriceCode;
+	public void setPriceCode(int priceCode) {
+		switch (priceCode) {
+		case CHILDRENS:
+			calculator = new ChildrenPriceCalculator();
+			break;
+		case REGULAR:
+			calculator = new RegularPriceCalculator();
+			break;
+		case NEW_RELEASE:
+			calculator = new NewReleasePriceCalculator();
+			break;
+		}
     }
 
     public String getTitle() {
