@@ -53,4 +53,19 @@ public class CustomerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testHtmlStatementForCustomer1() {
+        String expected =
+            "\n<h1>Rental Record for Donald Duck</h1>\n" +
+            "<table>\n" +
+            "\t<tr><td>Monty Python and the Holy Grail</td><td>3.5</td></tr>\n" +
+            "\t<tr><td>Star Trek 27                   </td><td>9.0</td></tr>\n" +
+            "\t<tr><td>Star Wars                      </td><td>5.0</td></tr>\n" +
+            "\t<tr><td>Shrek                          </td><td>6.0</td></tr>\n" +
+            "</table>\n" +
+            "<p>Amount owed is <b>23.5</b></p>\n" +
+            "<p>You earned <b>5</b> frequent renter points</p>\n";
+        String actual = customer1.htmlStatement();
+        Assert.assertEquals(expected, actual);
+    }
 }
